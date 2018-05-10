@@ -1,0 +1,18 @@
+<h2>Show Food order</h2>
+
+<ul>
+
+  <li>
+    <strong>Quantity:</strong>
+    <%= @food_order.quantity %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @food_order.status %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: food_order_path(@conn, :edit, @food_order) %></span>
+<span><%= link "Back", to: food_order_path(@conn, :index) %></span>

@@ -1,0 +1,28 @@
+<h2>Listing Food orders</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Quantity</th>
+      <th>Status</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for food_order <- @food_orders do %>
+    <tr>
+      <td><%= food_order.quantity %></td>
+      <td><%= food_order.status %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: food_order_path(@conn, :show, food_order), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: food_order_path(@conn, :edit, food_order), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: food_order_path(@conn, :delete, food_order), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Food order", to: food_order_path(@conn, :new) %></span>

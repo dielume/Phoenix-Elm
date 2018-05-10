@@ -1,0 +1,5 @@
+<h2>Edit Food order</h2>
+
+<%= render "form.html", Map.put(assigns, :action, food_order_path(@conn, :update, @food_order)) %>
+
+<span><%= link "Back", to: food_order_path(@conn, :index) %></span>

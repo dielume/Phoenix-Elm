@@ -5,4 +5,4 @@ import Html exposing (..)
 
 main : Html msg
 main =
-    text "Holi Boli"
+    text "Plop"
