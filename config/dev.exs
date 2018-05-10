@@ -37,7 +37,7 @@ config :tuto, TutoWeb.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/tuto_web/views/.*(ex)$},
-      ~r{lib/tuto_web/templates/.*(eex)$}
+      ~r{lib/tuto_web/templates/.*(eex|slim|slime)$}
     ]
   ]
 
