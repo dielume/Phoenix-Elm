@@ -1,8 +1,10 @@
 module Main exposing (..)
 
 import Html exposing (..)
+import Html.Attributes exposing (..)
 
 
-main : Html msg
+main : Html html
 main =
-    text "Plop"
+    div []
+        [ button [ class "btn btn-outline-success" ] [ text "Holi" ] ]

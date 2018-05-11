@@ -1,13 +1,14 @@
 defmodule Tuto.Kitchen.FoodOrder do
   use Ecto.Schema
   import Ecto.Changeset
-
+  alias Tuto.Kitchen.{Food, Order}
 
   schema "food_orders" do
     field :quantity, :integer
     field :status, :string
-    field :food_id, :id
-    field :order_id, :id
+    belongs_to :food, Food
+    belongs_to :order, Order
+
 
     timestamps()
   end
