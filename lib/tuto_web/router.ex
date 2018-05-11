@@ -17,7 +17,8 @@ defmodule TutoWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    resources "/foods", FoodController
+    get "/foods", FoodController, :index, as: :pages
+    resources "/foods", FoodController, except: [:index]
     resources "/orders", OrderController
     resources "/food_orders", FoodOrderController
   end

@@ -1,0 +1,22 @@
+h2 Listing Foods
+= pagination_links @foods
+table.table
+  thead
+    tr
+      th Name
+      th Description
+      th Price
+      th Photo
+      th
+  tbody
+    = for food <- @foods do
+      tr
+        td= food.name
+        td= food.description
+        td= food.price
+        td= food.photo
+        td.text-right
+          span= link "Show", to: food_path(@conn, :show, food), class: "btn btn-default btn-xs"
+          span= link "Edit", to: food_path(@conn, :edit, food), class: "btn btn-default btn-xs"
+          span= link "Delete", to: food_path(@conn, :delete, food), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+span= link "New Food", to: food_path(@conn, :new)

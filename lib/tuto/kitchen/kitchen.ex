@@ -8,8 +8,9 @@ defmodule Tuto.Kitchen do
 
   alias Tuto.Kitchen.Food
 
-  def list_foods do
-    Repo.all(Food)
+  def list_foods(params) do
+    Food
+    |> Repo.paginate(params)
   end
 
   def get_food!(id), do: Repo.get!(Food, id)

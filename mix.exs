@@ -41,7 +41,10 @@ defmodule Tuto.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:phoenix_slime, "~> 0.9.0"}
+      {:phoenix_slime, "~> 0.9.0"},
+      {:scrivener, "~> 2.0"},
+      {:scrivener_ecto, "~> 1.0"},
+      {:scrivener_html, "~> 1.7"}
     ]
   end
 

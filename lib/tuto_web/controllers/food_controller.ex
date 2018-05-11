@@ -4,8 +4,8 @@ defmodule TutoWeb.FoodController do
   alias Tuto.Kitchen
   alias Tuto.Kitchen.Food
 
-  def index(conn, _params) do
-    foods = Kitchen.list_foods()
+  def index(conn, params) do
+    foods = Kitchen.list_foods(params)
     render(conn, "index.html", foods: foods)
   end
 

@@ -36,6 +36,7 @@ defmodule TutoWeb do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+      import Scrivener.HTML
 
       import TutoWeb.Router.Helpers
       import TutoWeb.ErrorHelpers
