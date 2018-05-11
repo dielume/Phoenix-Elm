@@ -5,24 +5,28 @@ defmodule TutoWeb.OrderController do
   alias Tuto.Kitchen.Order
 
   def index(conn, _params) do
+    foods = Kitchen.list_foods()
     orders = Kitchen.list_orders()
     render(conn, "index.html", orders: orders)
   end
 
   def new(conn, _params) do
     changeset = Kitchen.change_order(%Order{})
-    render(conn, "new.html", changeset: changeset)
+    foods = Kitchen.list_foods()
+    render(conn, "new.html", changeset: changeset, foods: foods)
   end
 
   def create(conn, %{"order" => order_params}) do
-    case Kitchen.create_order(order_params) do
-      {:ok, order} ->
-        conn
-        |> put_flash(:info, "Order created successfully.")
-        |> redirect(to: order_path(conn, :show, order))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
+    IO.inspect order_params
+    conn |> redirect(to: order_path(conn, :new))
+    # case Kitchen.create_order(order_params) do
+    #   {:ok, order} ->
+    #     conn
+    #     |> put_flash(:info, "Order created successfully.")
+    #     |> redirect(to: order_path(conn, :show, order))
+    #   {:error, %Ecto.Changeset{} = changeset} ->
+    #     render(conn, "new.html", changeset: changeset)
+    # end
   end
 
   def show(conn, %{"id" => id}) do

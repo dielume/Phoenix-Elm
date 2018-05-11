@@ -11,6 +11,9 @@ defmodule TutoWeb.Endpoint do
     at: "/", from: :tuto, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
+  plug Plug.Static,
+    at: "/dishes", from: Path.expand("./assets/static/images/dishes"), gzip: false
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do

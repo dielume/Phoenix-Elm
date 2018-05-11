@@ -8,7 +8,12 @@ defmodule Tuto.Kitchen do
 
   alias Tuto.Kitchen.Food
 
-  def list_foods(params) do
+  def list_foods do
+    Food
+    |> Repo.all
+  end
+
+  def list_foods_pagination(params) do
     Food
     |> Repo.paginate(params)
   end
@@ -36,6 +41,11 @@ defmodule Tuto.Kitchen do
   end
 
   alias Tuto.Kitchen.Order
+
+  def waiter_collection do
+    ["Waiter1": 1, "Waiter2": 2, "Waiter3": 3, "Waiter4": 4, "Waiter5": 5]
+  end
+
 
   def list_orders do
     Repo.all(Order)

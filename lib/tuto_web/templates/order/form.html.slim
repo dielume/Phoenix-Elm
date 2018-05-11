@@ -1,0 +1,31 @@
+= form_for @changeset, @action, fn f ->
+  = if @changeset.action do
+    .alert.alert-danger
+      p Oops, something went wrong! Please check the errors below.
+  .form-group
+    = label f, :name, class: "control-label"
+    = select f, :name, Tuto.Kitchen.waiter_collection(), class: "form-control"
+    = error_tag f, :name
+  .form-group
+    = hidden_input f, :status, class: "form-control", value: "Pendiente"
+  .form-group
+    = label f, :table, class: "control-label"
+    = number_input f, :table, class: "form-control", min: 0, value: 0
+    = error_tag f, :table
+  .form-group
+    = submit "Submit", class: "btn btn-primary"
+
+.row
+  = for food <- @foods do
+    .col-xs-2.col-sm-6.col-md-3
+      .card
+        img.card-img-top alt="Card image cap" src="#{static_path(@conn, "/dishes/" <> food.photo)}"
+        .card-body
+          .input-group.mb-3
+            .input-group-prepend
+              .input-group-text
+
+          h5.card-title
+            = food.name
+          p.card-text
+            = "S/ " <> Integer.to_string(food.price)
