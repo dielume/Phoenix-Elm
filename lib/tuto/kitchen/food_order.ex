@@ -16,7 +16,7 @@ defmodule Tuto.Kitchen.FoodOrder do
   @doc false
   def changeset(food_order, attrs) do
     food_order
-    |> cast(attrs, [:quantity, :status])
-    |> validate_required([:quantity, :status])
+    |> cast(attrs, [:quantity, :status, :food_id, :order_id])
+    |> validate_required([:quantity, :status, :food_id, :order_id])
   end
 end

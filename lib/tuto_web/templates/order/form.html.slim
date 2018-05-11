@@ -15,17 +15,22 @@
   .form-group
     = submit "Submit", class: "btn btn-primary"
 
-.row
-  = for food <- @foods do
-    .col-xs-2.col-sm-6.col-md-3
-      .card
-        img.card-img-top alt="Card image cap" src="#{static_path(@conn, "/dishes/" <> food.photo)}"
-        .card-body
-          .input-group.mb-3
-            .input-group-prepend
-              .input-group-text
 
-          h5.card-title
-            = food.name
-          p.card-text
-            = "S/ " <> Integer.to_string(food.price)
+  .row
+    = for food <- @foods do
+      = inputs_for f, :food_orders, fn fp ->
+        .col-xs-2.col-sm-6.col-md-3
+          .card
+            img.card-img-top alt="Card image cap" src="#{static_path(@conn, "/dishes/" <> food.photo)}"
+            .card-body
+              .input-group.mb-3
+                .input-group-prepend
+                  .input-group-text
+                    = food_order_food_select(food.id)
+                    = food_order_quantity(food.id)
+                    / = number_input fp, :quantity, class: "form-control", min: 0, value: 0, multiple: true
+                    / = error_tag fp, :quantity
+              h5.card-title
+                = food.name
+              p.card-text
+                = "S/ " <> Integer.to_string(food.price)

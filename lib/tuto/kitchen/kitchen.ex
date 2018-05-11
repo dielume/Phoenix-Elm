@@ -6,6 +6,7 @@ defmodule Tuto.Kitchen do
   import Ecto.Query, warn: false
   alias Tuto.Repo
 
+# Food section
   alias Tuto.Kitchen.Food
 
   def list_foods do
@@ -40,12 +41,12 @@ defmodule Tuto.Kitchen do
     Food.changeset(food, %{})
   end
 
+# Order section
   alias Tuto.Kitchen.Order
 
   def waiter_collection do
-    ["Waiter1": 1, "Waiter2": 2, "Waiter3": 3, "Waiter4": 4, "Waiter5": 5]
+    ["Waiter1": "Waiter1", "Waiter2": "Waiter2", "Waiter3": "Waiter3", "Waiter4": "Waiter4", "Waiter5": "Waiter5"]
   end
-
 
   def list_orders do
     Repo.all(Order)
@@ -73,6 +74,7 @@ defmodule Tuto.Kitchen do
     Order.changeset(order, %{})
   end
 
+# FoodOrder section
   alias Tuto.Kitchen.FoodOrder
 
   def list_food_orders do
@@ -86,6 +88,14 @@ defmodule Tuto.Kitchen do
     %FoodOrder{}
     |> FoodOrder.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def create_food_order_selected_params(params, order_id) do
+    params["food_orders"]
+    |> Map.to_list
+    |> Enum.filter( fn {_id,food_order} -> Map.has_key?(food_order, "food") end)
+    |> Enum.map( fn {id,food_order} -> %{food_id: id, quantity: food_order["quantity"], order_id: order_id, status: "Espera"} end )
+    |> Enum.map(fn param -> create_food_order(param) end)
   end
 
 

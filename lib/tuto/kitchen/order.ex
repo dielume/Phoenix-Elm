@@ -7,7 +7,7 @@ defmodule Tuto.Kitchen.Order do
     field :name, :string
     field :status, :string
     field :table, :integer
-    has_many :food_orders, FoodOrder
+    has_many :food_orders, FoodOrder, on_delete: :delete_all
 
     timestamps()
   end
