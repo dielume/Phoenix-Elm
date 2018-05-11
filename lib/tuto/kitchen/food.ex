@@ -17,6 +17,6 @@ defmodule Tuto.Kitchen.Food do
   def changeset(food, attrs) do
     food
     |> cast(attrs, [:name, :description, :price, :photo])
-    |> validate_required([:name, :description, :price, :photo])
+    |> validate_required([:name, :price, :photo])
   end
 end

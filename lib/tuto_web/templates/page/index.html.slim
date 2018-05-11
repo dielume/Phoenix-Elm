@@ -3,8 +3,8 @@
     .card
       .card-body
         h5.card-title Mozos
-        a.card-link href="#" class="btn btn-outline-success" Ordenes
-        a.card-link href="#" class="btn btn-outline-success" Nueva orden
+        a.card-link href="#{order_path(@conn, :index)}" class="btn btn-outline-success" Ordenes
+        a.card-link href="#{order_path(@conn, :new)}" class="btn btn-outline-success" Nueva orden
   .col-12.col-sm-12.col-md-6
     .card
       .card-body

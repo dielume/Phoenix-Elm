@@ -5,7 +5,7 @@ defmodule Tuto.Repo.Migrations.CreateFoodOrders do
     create table(:food_orders) do
       add :quantity, :integer
       add :status, :string
-      add :food_id, references(:food, on_delete: :nothing)
+      add :food_id, references(:foods, on_delete: :nothing)
       add :order_id, references(:orders, on_delete: :nothing)
 
       timestamps()
