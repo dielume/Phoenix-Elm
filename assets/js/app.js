@@ -11,11 +11,15 @@
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
+
+
 import "phoenix_html"
+import Order from "./order"
 
-
+Order.init()
 const elmDiv = document.getElementById("elm-main");
-Elm.Main.embed(elmDiv);
+// Elm.Main.embed(elmDiv);
+
 
 
 // Import local files

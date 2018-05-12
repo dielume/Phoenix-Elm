@@ -26,10 +26,9 @@
               .input-group.mb-3
                 .input-group-prepend
                   .input-group-text
-                    = food_order_food_select(food.id)
+                    .food-order-food
+                      = food_order_food_select(food.id)
                     = food_order_quantity(food.id)
-                    / = number_input fp, :quantity, class: "form-control", min: 0, value: 0, multiple: true
-                    / = error_tag fp, :quantity
               h5.card-title
                 = food.name
               p.card-text
