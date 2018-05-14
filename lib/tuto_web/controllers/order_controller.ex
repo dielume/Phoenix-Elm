@@ -7,7 +7,8 @@ defmodule TutoWeb.OrderController do
 
   def index(conn, _params) do
     orders = Kitchen.list_orders()
-    render(conn, "index.html", orders: orders)
+    orders_json = Kitchen.list_orders_to_json()
+    render(conn, "index.html", orders: orders, orders_json: orders_json)
   end
 
   def new(conn, _params) do

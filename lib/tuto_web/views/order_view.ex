@@ -1,8 +1,8 @@
 defmodule TutoWeb.OrderView do
   use TutoWeb, :view
 
-  def index_order_elm do
-    content_tag :div, "", [id: "elm-main", data: Poison.encode!(%{"age" => 27, "name" => "Devin Torres"})]
+  def index_order_elm(data) do
+    content_tag :div, "", [id: "elm-main", data: data]
   end
 
   def food_order_quantity(food_id) do
