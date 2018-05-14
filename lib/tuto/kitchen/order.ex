@@ -4,7 +4,7 @@ defmodule Tuto.Kitchen.Order do
   alias Tuto.Kitchen.FoodOrder
 
   schema "orders" do
-    field :name, :string
+    field :waiter, :string
     field :status, :string
     field :table, :integer
     has_many :food_orders, FoodOrder, on_delete: :delete_all
@@ -15,7 +15,7 @@ defmodule Tuto.Kitchen.Order do
   @doc false
   def changeset(order, attrs) do
     order
-    |> cast(attrs, [:name, :status, :table])
-    |> validate_required([:name, :status, :table])
+    |> cast(attrs, [:waiter, :status, :table])
+    |> validate_required([:waiter, :status, :table])
   end
 end

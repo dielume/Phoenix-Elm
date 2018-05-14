@@ -3,8 +3,8 @@
 <ul>
 
   <li>
-    <strong>Name:</strong>
-    <%= @order.name %>
+    <strong>Waiter:</strong>
+    <%= @order.waiter %>
   </li>
 
   <li>

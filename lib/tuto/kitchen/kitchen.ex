@@ -5,9 +5,9 @@ defmodule Tuto.Kitchen do
 
   import Ecto.Query, warn: false
   alias Tuto.Repo
+  alias Tuto.Kitchen.{Order, Food, FoodOrder}
 
 # Food section
-  alias Tuto.Kitchen.Food
 
   def list_foods do
     Food
@@ -42,14 +42,44 @@ defmodule Tuto.Kitchen do
   end
 
 # Order section
-  alias Tuto.Kitchen.Order
 
   def waiter_collection do
     ["Waiter1": "Waiter1", "Waiter2": "Waiter2", "Waiter3": "Waiter3", "Waiter4": "Waiter4", "Waiter5": "Waiter5"]
   end
 
+  def table_collection do
+    1..20
+  end
+
   def list_orders do
-    Repo.all(Order)
+    Order
+    |> Repo.all
+  end
+
+  def list_orders_to_json do
+    Order
+    |> Repo.all
+    |> Repo.preload(:food_orders)
+    |> Enum.map(fn order -> %Order{order | food_orders: (order.food_orders |> Repo.preload(:food))} end)
+    |> Enum.map(fn order -> order_to_json(order) end)
+    |> Poison.encode!
+  end
+
+  defp order_to_json(%Order{} = order) do
+    %{ "id" => order.id,
+       "waiter" => order.waiter,
+       "table" => order.table,
+       "status" => order.status,
+       "food_order" =>   Enum.map(order.food_orders, &food_order_to_json(&1))
+    }
+  end
+
+  defp food_order_to_json(%FoodOrder{} = food_order) do
+    %{
+      "food" => food_order.food.name,
+      "status" => food_order.status,
+      "quantity" => food_order.quantity
+    }
   end
 
   def get_order!(id), do: Repo.get!(Order, id)
@@ -75,7 +105,6 @@ defmodule Tuto.Kitchen do
   end
 
 # FoodOrder section
-  alias Tuto.Kitchen.FoodOrder
 
   def list_food_orders do
     Repo.all(FoodOrder)

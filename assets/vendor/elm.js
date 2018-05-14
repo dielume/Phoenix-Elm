@@ -8152,12 +8152,8 @@ var _user$project$Main$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProg
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$button,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('btn btn-outline-success'),
-					_1: {ctor: '[]'}
-				},
+				_elm_lang$html$Html$p,
+				{ctor: '[]'},
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html$text('Holi'),
@@ -8165,6 +8161,17 @@ var _user$project$Main$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProg
 				}),
 			_1: {ctor: '[]'}
 		}));
+var _user$project$Main$Model = function (a) {
+	return {orders: a};
+};
+var _user$project$Main$Order = F5(
+	function (a, b, c, d, e) {
+		return {id: a, waiter: b, table: c, status: d, foods: e};
+	});
+var _user$project$Main$Food = F4(
+	function (a, b, c, d) {
+		return {id: a, name: b, quantity: c, status: d};
+	});
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};

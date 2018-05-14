@@ -3,7 +3,7 @@ defmodule Tuto.Repo.Migrations.CreateOrders do
 
   def change do
     create table(:orders) do
-      add :name, :string
+      add :waiter, :string
       add :status, :string
       add :table, :integer
 

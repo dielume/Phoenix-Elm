@@ -18,7 +18,11 @@ import Order from "./order"
 
 Order.init()
 const elmDiv = document.getElementById("elm-main");
-// Elm.Main.embed(elmDiv);
+if(elmDiv != null){
+  Elm.Main.embed(elmDiv);
+}
+
+
 
 
 

@@ -3,14 +3,14 @@
     .alert.alert-danger
       p Oops, something went wrong! Please check the errors below.
   .form-group
-    = label f, :name, class: "control-label"
-    = select f, :name, Tuto.Kitchen.waiter_collection(), class: "form-control"
-    = error_tag f, :name
+    = label f, :waiter, class: "control-label"
+    = select f, :waiter, Tuto.Kitchen.waiter_collection(), class: "form-control"
+    = error_tag f, :waiter
   .form-group
     = hidden_input f, :status, class: "form-control", value: "Pendiente"
   .form-group
     = label f, :table, class: "control-label"
-    = number_input f, :table, class: "form-control", min: 0, value: 0
+    = select f, :table, Tuto.Kitchen.table_collection(), class: "form-control"
     = error_tag f, :table
   .form-group
     = submit "Submit", class: "btn btn-primary"
