@@ -3,6 +3,9 @@ module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Json.Decode exposing (..)
+import Phoenix.Channel
+import Phoenix.Push
+import Phoenix.Socket
 
 
 --flags
@@ -18,6 +21,7 @@ type alias Flags =
 
 type alias Model =
     { orders : List Order
+    , phxSocket : Phoenix.Socket.Socket Msg
     }
 
 
@@ -72,12 +76,13 @@ initModel flags =
         Ok nuevos ->
             ( { orders =
                     nuevos
+              , phxSocket = Phoenix.Socket.init "ws://localhost:4000/socket/websocket"
               }
             , Cmd.none
             )
 
         Err msg ->
-            ( { orders = [] }, Cmd.none )
+            ( { orders = [], phxSocket = Phoenix.Socket.init "" }, Cmd.none )
 
 
 
@@ -86,11 +91,23 @@ initModel flags =
 
 type Msg
     = NoOp
+    | PhoenixMsg (Phoenix.Socket.Msg Msg)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        PhoenixMsg msg ->
+            let
+                ( phxSocket, phxCmd ) =
+                    Phoenix.Socket.update msg model.phxSocket
+            in
+            ( { model | phxSocket = phxSocket }
+            , Cmd.map PhoenixMsg phxCmd
+            )
+
+        _ ->
+            ( model, Cmd.none )
 
 
 
@@ -164,11 +181,24 @@ foodOrderCard food_order =
         ]
 
 
+
+--subscriptions
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Phoenix.Socket.listen model.phxSocket PhoenixMsg
+
+
+
+--main
+
+
 main : Program Flags Model Msg
 main =
     Html.programWithFlags
         { init = initModel
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = subscriptions
         , view = view
         , update = update
         }
