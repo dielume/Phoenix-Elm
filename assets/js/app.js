@@ -19,7 +19,10 @@ import Order from "./order"
 Order.init()
 const elmDiv = document.getElementById("elm-main");
 if(elmDiv != null){
-  Elm.Main.embed(elmDiv);
+  console.log(elmDiv.getAttribute("data"));
+  Elm.Main.embed(elmDiv, {
+          data: elmDiv.getAttribute("data")
+      });
 }
 
 
