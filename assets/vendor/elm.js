@@ -10409,7 +10409,8 @@ var _user$project$Main$foodOrderCard = function (food_order) {
 							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(''),
+								_0: _elm_lang$html$Html$text(
+									_elm_lang$core$Basics$toString(food_order.price)),
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
@@ -10668,23 +10669,21 @@ var _user$project$Main$Model = F3(
 	function (a, b, c) {
 		return {phxSocket: a, orders: b, messages: c};
 	});
-var _user$project$Main$ChatMessagePayload = function (a) {
-	return {message: a};
-};
 var _user$project$Main$Order = F5(
 	function (a, b, c, d, e) {
 		return {id: a, waiter: b, table: c, status: d, food_order: e};
 	});
-var _user$project$Main$FoodOrder = F3(
-	function (a, b, c) {
-		return {food: a, status: b, quantity: c};
+var _user$project$Main$FoodOrder = F4(
+	function (a, b, c, d) {
+		return {food: a, status: b, quantity: c, price: d};
 	});
-var _user$project$Main$decodeFoodOrder = A4(
-	_elm_lang$core$Json_Decode$map3,
+var _user$project$Main$decodeFoodOrder = A5(
+	_elm_lang$core$Json_Decode$map4,
 	_user$project$Main$FoodOrder,
 	A2(_elm_lang$core$Json_Decode$field, 'food', _elm_lang$core$Json_Decode$string),
 	A2(_elm_lang$core$Json_Decode$field, 'status', _elm_lang$core$Json_Decode$string),
-	A2(_elm_lang$core$Json_Decode$field, 'quantity', _elm_lang$core$Json_Decode$int));
+	A2(_elm_lang$core$Json_Decode$field, 'quantity', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode$field, 'price', _elm_lang$core$Json_Decode$int));
 var _user$project$Main$orderDecoder = A6(
 	_elm_lang$core$Json_Decode$map5,
 	_user$project$Main$Order,

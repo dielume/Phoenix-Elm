@@ -78,7 +78,8 @@ defmodule Tuto.Kitchen do
     %{
       "food" => food_order.food.name,
       "status" => food_order.status,
-      "quantity" => food_order.quantity
+      "quantity" => food_order.quantity,
+      "price" => food_order.food.price
     }
   end
 

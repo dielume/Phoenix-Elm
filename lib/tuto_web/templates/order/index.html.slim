@@ -1,20 +1,20 @@
 h2 Listing Orders
 = index_order_elm(@orders_json)
-table.table
-  thead
-    tr
-      th Waiter
-      th Status
-      th Table
-      th
-  tbody
-    = for order <- @orders do
-      tr
-        td= order.waiter
-        td= order.status
-        td= order.table
-        td.text-right
-          span= link "Show", to: order_path(@conn, :show, order), class: "btn btn-default btn-xs"
-          span= link "Edit", to: order_path(@conn, :edit, order), class: "btn btn-default btn-xs"
-          span= link "Delete", to: order_path(@conn, :delete, order), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
-span= link "New Order", to: order_path(@conn, :new)
+/ table.table
+/   thead
+/     tr
+/       th Waiter
+/       th Status
+/       th Table
+/       th
+/   tbody
+/     = for order <- @orders do
+/       tr
+/         td= order.waiter
+/         td= order.status
+/         td= order.table
+/         td.text-right
+/           span= link "Show", to: order_path(@conn, :show, order), class: "btn btn-default btn-xs"
+/           span= link "Edit", to: order_path(@conn, :edit, order), class: "btn btn-default btn-xs"
+/           span= link "Delete", to: order_path(@conn, :delete, order), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+/ span= link "New Order", to: order_path(@conn, :new)

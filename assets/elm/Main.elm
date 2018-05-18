@@ -29,11 +29,6 @@ type alias Model =
     }
 
 
-type alias ChatMessagePayload =
-    { message : String
-    }
-
-
 type alias Order =
     { id : Int
     , waiter : String
@@ -47,6 +42,7 @@ type alias FoodOrder =
     { food : String
     , status : String
     , quantity : Int
+    , price : Int
     }
 
 
@@ -68,11 +64,12 @@ orderDecoder =
 
 decodeFoodOrder : JsDecode.Decoder FoodOrder
 decodeFoodOrder =
-    JsDecode.map3
+    JsDecode.map4
         FoodOrder
         (JsDecode.field "food" JsDecode.string)
         (JsDecode.field "status" JsDecode.string)
         (JsDecode.field "quantity" JsDecode.int)
+        (JsDecode.field "price" JsDecode.int)
 
 
 init : Flags -> ( Model, Cmd Msg )
@@ -257,7 +254,7 @@ foodOrderCard food_order =
         [ th [] [ text (toString food_order.food) ]
         , th [] [ text (toString food_order.status) ]
         , th [] [ text (toString food_order.quantity) ]
-        , th [] [ text "" ]
+        , th [] [ text (toString food_order.price) ]
         ]
 
 
