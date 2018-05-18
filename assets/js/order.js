@@ -1,6 +1,5 @@
 var Order = {
   init(){
-    console.log("holi");
     $('.food-order-food input').change( function(){
       var food = $(this)
       let foodId = food.attr("id").slice(18).split("_")[0]

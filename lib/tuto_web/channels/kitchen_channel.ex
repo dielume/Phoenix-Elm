@@ -1,14 +1,18 @@
 defmodule TutoWeb.KitchenChannel do
   use TutoWeb, :channel
 
-  def join("kitchen:lobby", payload, socket) do
+  def join("kitchen:" <> name, _payload, socket) do
+      IO.inspect "entreeeee"
       {:ok, socket}
   end
 
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
-  def handle_in("ping", payload, socket) do
-    {:reply, {:ok, payload}, socket}
+  def handle_in("shout", payload, socket) do
+    IO.inspect "holiiiii"
+    IO.inspect payload
+    broadcast! socket, "pong", payload
+    {:reply, :ok, socket}
   end
 
   # It is also common to receive messages from the client and

@@ -8561,6 +8561,121 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
 
+var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode$field, 'keyCode', _elm_lang$core$Json_Decode$int);
+var _elm_lang$html$Html_Events$targetChecked = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'checked',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$bool);
+var _elm_lang$html$Html_Events$targetValue = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'value',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$string);
+var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
+var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
+var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
+var _elm_lang$html$Html_Events$onFocus = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'focus',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onBlur = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'blur',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
+	_elm_lang$html$Html_Events$defaultOptions,
+	{preventDefault: true});
+var _elm_lang$html$Html_Events$onSubmit = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'submit',
+		_elm_lang$html$Html_Events$onSubmitOptions,
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onCheck = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
+};
+var _elm_lang$html$Html_Events$onInput = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'input',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
+var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseout',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseover',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseleave',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseenter',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseup',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mousedown',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'dblclick',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$Options = F2(
+	function (a, b) {
+		return {stopPropagation: a, preventDefault: b};
+	});
+
 var _elm_lang$websocket$Native_WebSocket = function() {
 
 function open(url, settings)
@@ -9800,6 +9915,456 @@ var _fbonetti$elm_phoenix_socket$Phoenix_Socket$listen = F2(
 			});
 	});
 
+var _user$project$App$foodOrderCard = function (food_order) {
+	return A2(
+		_elm_lang$html$Html$tr,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$th,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(
+						_elm_lang$core$Basics$toString(food_order.food)),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$th,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							_elm_lang$core$Basics$toString(food_order.status)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$th,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								_elm_lang$core$Basics$toString(food_order.quantity)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$th,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(''),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$App$foodOrderCards = function (food_orders) {
+	return A2(
+		_elm_lang$html$Html$tbody,
+		{ctor: '[]'},
+		A2(_elm_lang$core$List$map, _user$project$App$foodOrderCard, food_orders));
+};
+var _user$project$App$orderCard = function (order) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('card'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('card-header'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h5,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('mb-0'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('title-card'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$b,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('N:'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$span,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													_elm_lang$core$Basics$toString(order.id)),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(' '),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$b,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Mozo:'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$span,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text(
+																_elm_lang$core$Basics$toString(order.waiter)),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html$text(' '),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$b,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Mesa:'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$span,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text(
+																			_elm_lang$core$Basics$toString(order.table)),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text(' '),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$b,
+																			{ctor: '[]'},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text('Estado:'),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$span,
+																				{ctor: '[]'},
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html$text(
+																						_elm_lang$core$Basics$toString(order.status)),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('card-body'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$table,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('table table-striped table-hover'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$thead,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$tr,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$th,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Plato'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$th,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Estado'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$th,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Cantidad'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$th,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Precio'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$App$foodOrderCards(order.food_order),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$App$orderList = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		A2(_elm_lang$core$List$map, _user$project$App$orderCard, model.orders));
+};
+var _user$project$App$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$App$orderList(model),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$App$Flags = function (a) {
+	return {data: a};
+};
+var _user$project$App$Model = F2(
+	function (a, b) {
+		return {orders: a, phxSocket: b};
+	});
+var _user$project$App$Order = F5(
+	function (a, b, c, d, e) {
+		return {id: a, waiter: b, table: c, status: d, food_order: e};
+	});
+var _user$project$App$FoodOrder = F3(
+	function (a, b, c) {
+		return {food: a, status: b, quantity: c};
+	});
+var _user$project$App$decodeFoodOrder = A4(
+	_elm_lang$core$Json_Decode$map3,
+	_user$project$App$FoodOrder,
+	A2(_elm_lang$core$Json_Decode$field, 'food', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'status', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'quantity', _elm_lang$core$Json_Decode$int));
+var _user$project$App$orderDecoder = A6(
+	_elm_lang$core$Json_Decode$map5,
+	_user$project$App$Order,
+	A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode$field, 'waiter', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'table', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode$field, 'status', _elm_lang$core$Json_Decode$string),
+	A2(
+		_elm_lang$core$Json_Decode$field,
+		'food_order',
+		_elm_lang$core$Json_Decode$list(_user$project$App$decodeFoodOrder)));
+var _user$project$App$modelDecoder = _elm_lang$core$Json_Decode$list(_user$project$App$orderDecoder);
+var _user$project$App$SocketMsg = function (a) {
+	return {ctor: 'SocketMsg', _0: a};
+};
+var _user$project$App$PhoenixMsg = function (a) {
+	return {ctor: 'PhoenixMsg', _0: a};
+};
+var _user$project$App$subscriptions = function (model) {
+	return A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$listen, model.phxSocket, _user$project$App$PhoenixMsg);
+};
+var _user$project$App$ReceiveEntries = function (a) {
+	return {ctor: 'ReceiveEntries', _0: a};
+};
+var _user$project$App$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'PhoenixMsg':
+				var _p1 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$update, _p0._0, model.phxSocket);
+				var phxSocket = _p1._0;
+				var phxCmd = _p1._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{phxSocket: phxSocket}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$App$PhoenixMsg, phxCmd)
+				};
+			case 'SocketMsg':
+				var _p2 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$update, _p0._0, model.phxSocket);
+				var phxSocket = _p2._0;
+				var phxCmd = _p2._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{phxSocket: phxSocket}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$App$SocketMsg, phxCmd)
+				};
+			case 'RequestEntries':
+				var push = A2(
+					_fbonetti$elm_phoenix_socket$Phoenix_Push$onOk,
+					_user$project$App$ReceiveEntries,
+					A2(_fbonetti$elm_phoenix_socket$Phoenix_Push$init, 'ping', 'kitchen:1'));
+				var _p3 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$push, push, model.phxSocket);
+				var phxSocket = _p3._0;
+				var phxCmd = _p3._1;
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{phxSocket: phxSocket}),
+					{
+						ctor: '::',
+						_0: A2(_elm_lang$core$Platform_Cmd$map, _user$project$App$SocketMsg, phxCmd),
+						_1: {ctor: '[]'}
+					});
+			case 'ReceiveEntries':
+				var entries = A2(_elm_lang$core$Debug$log, 'entre', _p0._0);
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{ctor: '[]'});
+			default:
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$App$RequestEntries = {ctor: 'RequestEntries'};
+var _user$project$App$initModel = function (flags) {
+	var socketInit = _fbonetti$elm_phoenix_socket$Phoenix_Socket$withDebug(
+		_fbonetti$elm_phoenix_socket$Phoenix_Socket$init('ws://localhost:4000/socket/websocket'));
+	var channelName = 'kitchen:1';
+	var channel = A2(
+		_fbonetti$elm_phoenix_socket$Phoenix_Channel$onJoin,
+		_elm_lang$core$Basics$always(_user$project$App$RequestEntries),
+		_fbonetti$elm_phoenix_socket$Phoenix_Channel$init(channelName));
+	var _p4 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$join, channel, socketInit);
+	var phxSocket = _p4._0;
+	var cmd = _p4._1;
+	var entries = A2(_elm_lang$core$Debug$log, 'holi', phxSocket);
+	var entries2 = A2(_elm_lang$core$Debug$log, 'holi2', cmd);
+	var valueDue = A2(_elm_lang$core$Json_Decode$decodeString, _user$project$App$modelDecoder, flags.data);
+	var _p5 = valueDue;
+	if (_p5.ctor === 'Ok') {
+		var holi = A2(_elm_lang$core$Debug$log, 'holi3', 'holi');
+		return {
+			ctor: '_Tuple2',
+			_0: {orders: _p5._0, phxSocket: phxSocket},
+			_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$App$PhoenixMsg, cmd)
+		};
+	} else {
+		return {
+			ctor: '_Tuple2',
+			_0: {
+				orders: {ctor: '[]'},
+				phxSocket: _fbonetti$elm_phoenix_socket$Phoenix_Socket$init('')
+			},
+			_1: _elm_lang$core$Platform_Cmd$none
+		};
+	}
+};
+var _user$project$App$main = _elm_lang$html$Html$programWithFlags(
+	{init: _user$project$App$initModel, subscriptions: _user$project$App$subscriptions, view: _user$project$App$view, update: _user$project$App$update})(
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (data) {
+			return _elm_lang$core$Json_Decode$succeed(
+				{data: data});
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'data', _elm_lang$core$Json_Decode$string)));
+var _user$project$App$NoOp = {ctor: 'NoOp'};
+
 var _user$project$Main$foodOrderCard = function (food_order) {
 	return A2(
 		_elm_lang$html$Html$tr,
@@ -10096,23 +10661,16 @@ var _user$project$Main$orderList = function (model) {
 		{ctor: '[]'},
 		A2(_elm_lang$core$List$map, _user$project$Main$orderCard, model.orders));
 };
-var _user$project$Main$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _user$project$Main$orderList(model),
-			_1: {ctor: '[]'}
-		});
-};
 var _user$project$Main$Flags = function (a) {
 	return {data: a};
 };
-var _user$project$Main$Model = F2(
-	function (a, b) {
-		return {orders: a, phxSocket: b};
+var _user$project$Main$Model = F3(
+	function (a, b, c) {
+		return {phxSocket: a, orders: b, messages: c};
 	});
+var _user$project$Main$ChatMessagePayload = function (a) {
+	return {message: a};
+};
 var _user$project$Main$Order = F5(
 	function (a, b, c, d, e) {
 		return {id: a, waiter: b, table: c, status: d, food_order: e};
@@ -10139,55 +10697,167 @@ var _user$project$Main$orderDecoder = A6(
 		'food_order',
 		_elm_lang$core$Json_Decode$list(_user$project$Main$decodeFoodOrder)));
 var _user$project$Main$modelDecoder = _elm_lang$core$Json_Decode$list(_user$project$Main$orderDecoder);
-var _user$project$Main$initModel = function (flags) {
+var _user$project$Main$HandleSendError = function (a) {
+	return {ctor: 'HandleSendError', _0: a};
+};
+var _user$project$Main$ReceiveChatMessage = function (a) {
+	return {ctor: 'ReceiveChatMessage', _0: a};
+};
+var _user$project$Main$SendMessage = {ctor: 'SendMessage'};
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('btn btn-success'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$SendMessage),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Send Message'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Main$orderList(model),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Main$SetMessage = function (a) {
+	return {ctor: 'SetMessage', _0: a};
+};
+var _user$project$Main$PhoenixMsg = function (a) {
+	return {ctor: 'PhoenixMsg', _0: a};
+};
+var _user$project$Main$init = function (flags) {
+	var channel = _fbonetti$elm_phoenix_socket$Phoenix_Channel$init('kitchen:1');
+	var _p0 = A2(
+		_fbonetti$elm_phoenix_socket$Phoenix_Socket$join,
+		channel,
+		A4(
+			_fbonetti$elm_phoenix_socket$Phoenix_Socket$on,
+			'shout',
+			'kitchen:1',
+			_user$project$Main$ReceiveChatMessage,
+			_fbonetti$elm_phoenix_socket$Phoenix_Socket$withDebug(
+				_fbonetti$elm_phoenix_socket$Phoenix_Socket$init('ws://localhost:4000/socket/websocket'))));
+	var initSocket = _p0._0;
+	var phxCmd = _p0._1;
 	var valueDue = A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Main$modelDecoder, flags.data);
-	var _p0 = valueDue;
-	if (_p0.ctor === 'Ok') {
+	var _p1 = valueDue;
+	if (_p1.ctor === 'Ok') {
 		return {
 			ctor: '_Tuple2',
 			_0: {
-				orders: _p0._0,
-				phxSocket: _fbonetti$elm_phoenix_socket$Phoenix_Socket$init('ws://localhost:4000/socket/websocket')
+				orders: _p1._0,
+				phxSocket: initSocket,
+				messages: {ctor: '[]'}
 			},
-			_1: _elm_lang$core$Platform_Cmd$none
+			_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$PhoenixMsg, phxCmd)
 		};
 	} else {
 		return {
 			ctor: '_Tuple2',
 			_0: {
 				orders: {ctor: '[]'},
-				phxSocket: _fbonetti$elm_phoenix_socket$Phoenix_Socket$init('')
+				phxSocket: _fbonetti$elm_phoenix_socket$Phoenix_Socket$init(''),
+				messages: {ctor: '[]'}
 			},
 			_1: _elm_lang$core$Platform_Cmd$none
 		};
 	}
 };
-var _user$project$Main$PhoenixMsg = function (a) {
-	return {ctor: 'PhoenixMsg', _0: a};
-};
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
-		if (_p1.ctor === 'PhoenixMsg') {
-			var _p2 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$update, _p1._0, model.phxSocket);
-			var phxSocket = _p2._0;
-			var phxCmd = _p2._1;
-			return {
-				ctor: '_Tuple2',
-				_0: _elm_lang$core$Native_Utils.update(
-					model,
-					{phxSocket: phxSocket}),
-				_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$PhoenixMsg, phxCmd)
-			};
-		} else {
-			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		var _p2 = msg;
+		switch (_p2.ctor) {
+			case 'PhoenixMsg':
+				var _p3 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$update, _p2._0, model.phxSocket);
+				var phxSocket = _p3._0;
+				var phxCmd = _p3._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{phxSocket: phxSocket}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$PhoenixMsg, phxCmd)
+				};
+			case 'SendMessage':
+				var payload = _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'message',
+							_1: _elm_lang$core$Json_Encode$string('holi')
+						},
+						_1: {ctor: '[]'}
+					});
+				var phxPush = A2(
+					_fbonetti$elm_phoenix_socket$Phoenix_Push$onError,
+					_user$project$Main$HandleSendError,
+					A2(
+						_fbonetti$elm_phoenix_socket$Phoenix_Push$onOk,
+						_user$project$Main$ReceiveChatMessage,
+						A2(
+							_fbonetti$elm_phoenix_socket$Phoenix_Push$withPayload,
+							payload,
+							A2(_fbonetti$elm_phoenix_socket$Phoenix_Push$init, 'shout', 'kitchen:1'))));
+				var _p4 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$push, phxPush, model.phxSocket);
+				var phxSocket = _p4._0;
+				var phxCmd = _p4._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{phxSocket: phxSocket}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$PhoenixMsg, phxCmd)
+				};
+			case 'ReceiveChatMessage':
+				var messageDecoder = A2(_elm_lang$core$Json_Decode$field, 'message', _elm_lang$core$Json_Decode$string);
+				var somePayload = A2(_elm_lang$core$Json_Decode$decodeValue, messageDecoder, _p2._0);
+				var example = A2(_elm_lang$core$Debug$log, 'entro', 'entro');
+				var _p5 = somePayload;
+				if (_p5.ctor === 'Ok') {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								messages: {ctor: '::', _0: _p5._0, _1: model.messages}
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								messages: {ctor: '::', _0: 'Failed to receive message', _1: model.messages}
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
+			default:
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 		}
 	});
 var _user$project$Main$subscriptions = function (model) {
 	return A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$listen, model.phxSocket, _user$project$Main$PhoenixMsg);
 };
 var _user$project$Main$main = _elm_lang$html$Html$programWithFlags(
-	{init: _user$project$Main$initModel, subscriptions: _user$project$Main$subscriptions, view: _user$project$Main$view, update: _user$project$Main$update})(
+	{init: _user$project$Main$init, view: _user$project$Main$view, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions})(
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
 		function (data) {
@@ -10195,9 +10865,12 @@ var _user$project$Main$main = _elm_lang$html$Html$programWithFlags(
 				{data: data});
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'data', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$NoOp = {ctor: 'NoOp'};
 
 var Elm = {};
+Elm['App'] = Elm['App'] || {};
+if (typeof _user$project$App$main !== 'undefined') {
+    _user$project$App$main(Elm['App'], 'App', undefined);
+}
 Elm['Main'] = Elm['Main'] || {};
 if (typeof _user$project$Main$main !== 'undefined') {
     _user$project$Main$main(Elm['Main'], 'Main', undefined);

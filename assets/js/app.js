@@ -15,9 +15,12 @@
 
 import "phoenix_html"
 import Order from "./order"
+import Example from "./example"
+import socket from "./socket"
+
 
 Order.init()
-const elmDiv = document.getElementById("elm-main");
+var elmDiv = document.getElementById("elm-main");
 if(elmDiv != null){
   console.log(elmDiv.getAttribute("data"));
   Elm.Main.embed(elmDiv, {
@@ -25,6 +28,13 @@ if(elmDiv != null){
       });
 }
 
+// if(elmDiv != null){
+//   console.log(elmDiv.getAttribute("data"));
+//   Elm.App.embed(elmDiv, {
+//           data: elmDiv.getAttribute("data")
+//       });
+// }
+// Example.init(socket, document.getElementById("elm-main"))
 
 
 

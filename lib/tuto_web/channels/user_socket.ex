@@ -3,7 +3,7 @@ defmodule TutoWeb.UserSocket do
 
   ## Channels
   # channel "room:*", TutoWeb.RoomChannel
-  channel "kitchen:lobby", TutoWeb.KitchenChannel
+  channel "kitchen:*", TutoWeb.KitchenChannel
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll

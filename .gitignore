@@ -27,3 +27,5 @@ npm-debug.log
 /config/*.secret.exs
 
 /priv/repo/examples.exs
+/assets/elm/App.elm
+/assets/js/example.js
