@@ -258,6 +258,10 @@ orderCard order =
                     , text " "
                     , b [] [ text "Estado:" ]
                     , span [] [ text (toString order.status) ]
+                    , text " "
+                    , a [ class "btn btn-success", href ("/orders/" ++ toString order.id ++ "/edit") ] [ text "Agregar" ]
+                    , text " "
+                    , a [ class "btn btn-danger" ] [ text "Cancelar" ]
                     ]
                 ]
             ]

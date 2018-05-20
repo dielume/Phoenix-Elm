@@ -186,7 +186,56 @@ var _user$project$Main$orderCard = function (order) {
 																						_elm_lang$core$Basics$toString(order.status)),
 																					_1: {ctor: '[]'}
 																				}),
-																			_1: {ctor: '[]'}
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text(' '),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$a,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$class('btn btn-success'),
+																							_1: {
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$href(
+																									A2(
+																										_elm_lang$core$Basics_ops['++'],
+																										'/orders/',
+																										A2(
+																											_elm_lang$core$Basics_ops['++'],
+																											_elm_lang$core$Basics$toString(order.id),
+																											'/edit'))),
+																								_1: {ctor: '[]'}
+																							}
+																						},
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html$text('Agregar'),
+																							_1: {ctor: '[]'}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html$text(' '),
+																						_1: {
+																							ctor: '::',
+																							_0: A2(
+																								_elm_lang$html$Html$a,
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$class('btn btn-danger'),
+																									_1: {ctor: '[]'}
+																								},
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html$text('Cancelar'),
+																									_1: {ctor: '[]'}
+																								}),
+																							_1: {ctor: '[]'}
+																						}
+																					}
+																				}
+																			}
 																		}
 																	}
 																}

@@ -39,19 +39,22 @@ defmodule TutoWeb.OrderController do
   def edit(conn, %{"id" => id}) do
     order = Kitchen.get_order!(id)
     changeset = Kitchen.change_order(order)
-    render(conn, "edit.html", order: order, changeset: changeset)
+    foods = Kitchen.list_foods()
+    render(conn, "edit.html", order: order, changeset: changeset, foods: foods)
   end
 
   def update(conn, %{"id" => id, "order" => order_params}) do
     order = Kitchen.get_order!(id)
-
-    case Kitchen.update_order(order, order_params) do
-      {:ok, order} ->
-        conn
-        |> put_flash(:info, "Order updated successfully.")
-        |> redirect(to: order_path(conn, :show, order))
+    with {:ok, order} <- Kitchen.update_order(order, order_params),
+          _food_order <- Kitchen.create_food_order_selected_params(order_params, order.id)
+    do
+      TutoWeb.Endpoint.broadcast! "kitchen:1", "update_order", Kitchen.order_to_json_preload(order)
+      conn
+      |> put_flash(:info, "Order created successfully.")
+      |> redirect(to: order_path(conn, :index))
+    else
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", order: order, changeset: changeset)
+          render(conn, "edit.html", changeset: changeset)
     end
   end
 
