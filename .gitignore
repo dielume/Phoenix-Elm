@@ -28,4 +28,5 @@ npm-debug.log
 
 /priv/repo/examples.exs
 /assets/elm/App.elm
+/assets/elm/NewOrder.elm
 /assets/js/example.js

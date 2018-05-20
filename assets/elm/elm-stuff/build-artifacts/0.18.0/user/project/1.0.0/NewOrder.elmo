@@ -1,0 +1,62 @@
+var _user$project$NewOrder$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$NewOrder$init = {
+	ctor: '_Tuple2',
+	_0: {orderRequest: ''},
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$NewOrder$Model = function (a) {
+	return {orderRequest: a};
+};
+var _user$project$NewOrder$NewOrder = function (a) {
+	return {ctor: 'NewOrder', _0: a};
+};
+var _user$project$NewOrder$postNewOrder = function () {
+	var url = 'http://localhost:4000/orders';
+	return A2(
+		_elm_lang$http$Http$send,
+		_user$project$NewOrder$NewOrder,
+		A3(_elm_lang$http$Http$post, url, _elm_lang$http$Http$emptyBody, _elm_lang$core$Json_Decode$string));
+}();
+var _user$project$NewOrder$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'PostNewOrder':
+				return {ctor: '_Tuple2', _0: model, _1: _user$project$NewOrder$postNewOrder};
+			case 'NewOrder':
+				if (_p0._0.ctor === 'Ok') {
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				} else {
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				}
+			default:
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$NewOrder$PostNewOrder = {ctor: 'PostNewOrder'};
+var _user$project$NewOrder$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(_user$project$NewOrder$PostNewOrder),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Submit'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$NewOrder$main = _elm_lang$html$Html$program(
+	{init: _user$project$NewOrder$init, view: _user$project$NewOrder$view, update: _user$project$NewOrder$update, subscriptions: _user$project$NewOrder$subscriptions})();
+var _user$project$NewOrder$Noop = {ctor: 'Noop'};

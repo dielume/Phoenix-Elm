@@ -74,6 +74,17 @@ defmodule Tuto.Kitchen do
     }
   end
 
+  def order_to_json_preload(%Order{} = order) do
+    order = order
+            |> Repo.preload([food_orders: [:food]])
+    %{ "id" => order.id,
+       "waiter" => order.waiter,
+       "table" => order.table,
+       "status" => order.status,
+       "food_order" =>   Enum.map(order.food_orders, &food_order_to_json(&1))
+    }
+  end
+
   defp food_order_to_json(%FoodOrder{} = food_order) do
     %{
       "food" => food_order.food.name,

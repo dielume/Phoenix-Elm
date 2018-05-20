@@ -51,7 +51,7 @@ exports.config = {
 
     elmBrunch: {
       elmFolder: "elm",
-      mainModules: ["Main.elm", "App.elm"],
+      mainModules: ["Main.elm", "NewOrder.elm"],
       outputFolder: "../vendor",
       outputFile: "elm.js",
       makeParameters: ["--warn"]

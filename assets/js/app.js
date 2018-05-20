@@ -28,13 +28,6 @@ if(elmDiv != null){
       });
 }
 
-// if(elmDiv != null){
-//   console.log(elmDiv.getAttribute("data"));
-//   Elm.App.embed(elmDiv, {
-//           data: elmDiv.getAttribute("data")
-//       });
-// }
-// Example.init(socket, document.getElementById("elm-main"))
 
 
 

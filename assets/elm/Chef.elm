@@ -1,4 +1,4 @@
-module Main exposing (..)
+module Chef exposing (..)
 
 import Debug exposing (log)
 import Html exposing (..)
@@ -84,8 +84,7 @@ init flags =
         ( initSocket, phxCmd ) =
             Phoenix.Socket.init "ws://localhost:4000/socket/websocket"
                 |> Phoenix.Socket.withDebug
-                |> Phoenix.Socket.on "waiter" "kitchen:1" ReceiveChatMessage
-                |> Phoenix.Socket.on "new_order" "kitchen:1" ReceiveNewOrder
+                |> Phoenix.Socket.on "chef" "kitchen:1" ReceiveChatMessage
                 |> Phoenix.Socket.join channel
     in
     case valueDue of
@@ -110,7 +109,6 @@ type Msg
     = PhoenixMsg (Phoenix.Socket.Msg Msg)
     | SetMessage String
     | SendMessage
-    | ReceiveNewOrder JsEncode.Value
     | ReceiveChatMessage JsEncode.Value
     | HandleSendError JsEncode.Value
 
@@ -138,7 +136,7 @@ update msg model =
                         ]
 
                 phxPush =
-                    Phoenix.Push.init "waiter" "kitchen:1"
+                    Phoenix.Push.init "chef" "kitchen:1"
                         |> Phoenix.Push.withPayload payload
                         |> Phoenix.Push.onError HandleSendError
 
@@ -173,23 +171,7 @@ update msg model =
                 Err error ->
                     ( { model | messages = "Failed to receive message" :: model.messages }, Cmd.none )
 
-        ReceiveNewOrder raw ->
-            let
-                example =
-                    log "entro" raw
-
-                somePayload =
-                    JsDecode.decodeValue orderDecoder raw
-            in
-            case somePayload of
-                Ok payload ->
-                    ( { model | orders = payload :: filterRepeatOrder payload model.orders }
-                    , Cmd.none
-                    )
-
-                Err error ->
-                    ( { model | messages = "Failed to receive message" :: model.messages }, Cmd.none )
-
+        --
         HandleSendError err ->
             let
                 message =
@@ -199,11 +181,6 @@ update msg model =
 
         _ ->
             ( model, Cmd.none )
-
-
-filterRepeatOrder : Order -> List Order -> List Order
-filterRepeatOrder newOrder orders =
-    List.filter (\order -> order.id /= newOrder.id) orders
 
 
 
