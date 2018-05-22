@@ -86,7 +86,7 @@ defmodule Tuto.Kitchen do
        "table" => order.table,
        "status" => order.status,
        "food_order" =>   Enum.map(order.food_orders, &food_order_to_json(&1))
-    }
+    } 
   end
 
   defp food_order_to_json(%FoodOrder{} = food_order) do

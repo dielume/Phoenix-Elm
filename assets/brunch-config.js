@@ -20,7 +20,7 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: "css/app.scss"
     },
     templates: {
       joinTo: "js/app.js"
@@ -84,6 +84,9 @@ exports.config = {
     Tether: 'tether',
     Popper: 'popper.js',
     bootstrap: 'bootstrap', // Require Bootstrap's JavaScript globally
-    }
+    },
+    whitelist: [
+      "toastr"
+    ]
   }
 };

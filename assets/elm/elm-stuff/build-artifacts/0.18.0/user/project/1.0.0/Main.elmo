@@ -58,6 +58,73 @@ var _user$project$Main$foodOrderCards = function (food_orders) {
 		{ctor: '[]'},
 		A2(_elm_lang$core$List$map, _user$project$Main$foodOrderCard, food_orders));
 };
+var _user$project$Main$allMessage = function (message) {
+	return A2(
+		_elm_lang$html$Html$li,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(message),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main$allMessages = function (messages) {
+	return A2(
+		_elm_lang$html$Html$ul,
+		{ctor: '[]'},
+		A2(_elm_lang$core$List$map, _user$project$Main$allMessage, messages));
+};
+var _user$project$Main$filterRepeatOrder = F2(
+	function (newOrder, orders) {
+		return A2(
+			_elm_lang$core$List$filter,
+			function (order) {
+				return !_elm_lang$core$Native_Utils.eq(order.id, newOrder.id);
+			},
+			orders);
+	});
+var _user$project$Main$orderToJs = _elm_lang$core$Native_Platform.outgoingPort(
+	'orderToJs',
+	function (v) {
+		return v;
+	});
+var _user$project$Main$Flags = function (a) {
+	return {data: a};
+};
+var _user$project$Main$Model = F4(
+	function (a, b, c, d) {
+		return {phxSocket: a, orders: b, messages: c, toastr_message: d};
+	});
+var _user$project$Main$Order = F5(
+	function (a, b, c, d, e) {
+		return {id: a, waiter: b, table: c, status: d, food_order: e};
+	});
+var _user$project$Main$FoodOrder = F4(
+	function (a, b, c, d) {
+		return {food: a, status: b, quantity: c, price: d};
+	});
+var _user$project$Main$decodeFoodOrder = A5(
+	_elm_lang$core$Json_Decode$map4,
+	_user$project$Main$FoodOrder,
+	A2(_elm_lang$core$Json_Decode$field, 'food', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'status', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'quantity', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode$field, 'price', _elm_lang$core$Json_Decode$int));
+var _user$project$Main$orderDecoder = A6(
+	_elm_lang$core$Json_Decode$map5,
+	_user$project$Main$Order,
+	A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode$field, 'waiter', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'table', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode$field, 'status', _elm_lang$core$Json_Decode$string),
+	A2(
+		_elm_lang$core$Json_Decode$field,
+		'food_order',
+		_elm_lang$core$Json_Decode$list(_user$project$Main$decodeFoodOrder)));
+var _user$project$Main$modelDecoder = _elm_lang$core$Json_Decode$list(_user$project$Main$orderDecoder);
+var _user$project$Main$SendCancelMessage = function (a) {
+	return {ctor: 'SendCancelMessage', _0: a};
+};
 var _user$project$Main$orderCard = function (order) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -220,11 +287,16 @@ var _user$project$Main$orderCard = function (order) {
 																						_1: {
 																							ctor: '::',
 																							_0: A2(
-																								_elm_lang$html$Html$a,
+																								_elm_lang$html$Html$button,
 																								{
 																									ctor: '::',
-																									_0: _elm_lang$html$Html_Attributes$class('btn btn-danger'),
-																									_1: {ctor: '[]'}
+																									_0: _elm_lang$html$Html_Events$onClick(
+																										_user$project$Main$SendCancelMessage(order.id)),
+																									_1: {
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$class('btn btn-danger'),
+																										_1: {ctor: '[]'}
+																									}
 																								},
 																								{
 																									ctor: '::',
@@ -344,75 +416,7 @@ var _user$project$Main$orderList = function (model) {
 		{ctor: '[]'},
 		A2(_elm_lang$core$List$map, _user$project$Main$orderCard, model.orders));
 };
-var _user$project$Main$allMessage = function (message) {
-	return A2(
-		_elm_lang$html$Html$li,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text(message),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Main$allMessages = function (messages) {
-	return A2(
-		_elm_lang$html$Html$ul,
-		{ctor: '[]'},
-		A2(_elm_lang$core$List$map, _user$project$Main$allMessage, messages));
-};
-var _user$project$Main$filterRepeatOrder = F2(
-	function (newOrder, orders) {
-		return A2(
-			_elm_lang$core$List$filter,
-			function (order) {
-				return !_elm_lang$core$Native_Utils.eq(order.id, newOrder.id);
-			},
-			orders);
-	});
-var _user$project$Main$Flags = function (a) {
-	return {data: a};
-};
-var _user$project$Main$Model = F3(
-	function (a, b, c) {
-		return {phxSocket: a, orders: b, messages: c};
-	});
-var _user$project$Main$Order = F5(
-	function (a, b, c, d, e) {
-		return {id: a, waiter: b, table: c, status: d, food_order: e};
-	});
-var _user$project$Main$FoodOrder = F4(
-	function (a, b, c, d) {
-		return {food: a, status: b, quantity: c, price: d};
-	});
-var _user$project$Main$decodeFoodOrder = A5(
-	_elm_lang$core$Json_Decode$map4,
-	_user$project$Main$FoodOrder,
-	A2(_elm_lang$core$Json_Decode$field, 'food', _elm_lang$core$Json_Decode$string),
-	A2(_elm_lang$core$Json_Decode$field, 'status', _elm_lang$core$Json_Decode$string),
-	A2(_elm_lang$core$Json_Decode$field, 'quantity', _elm_lang$core$Json_Decode$int),
-	A2(_elm_lang$core$Json_Decode$field, 'price', _elm_lang$core$Json_Decode$int));
-var _user$project$Main$orderDecoder = A6(
-	_elm_lang$core$Json_Decode$map5,
-	_user$project$Main$Order,
-	A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$int),
-	A2(_elm_lang$core$Json_Decode$field, 'waiter', _elm_lang$core$Json_Decode$string),
-	A2(_elm_lang$core$Json_Decode$field, 'table', _elm_lang$core$Json_Decode$int),
-	A2(_elm_lang$core$Json_Decode$field, 'status', _elm_lang$core$Json_Decode$string),
-	A2(
-		_elm_lang$core$Json_Decode$field,
-		'food_order',
-		_elm_lang$core$Json_Decode$list(_user$project$Main$decodeFoodOrder)));
-var _user$project$Main$modelDecoder = _elm_lang$core$Json_Decode$list(_user$project$Main$orderDecoder);
-var _user$project$Main$HandleSendError = function (a) {
-	return {ctor: 'HandleSendError', _0: a};
-};
-var _user$project$Main$ReceiveChatMessage = function (a) {
-	return {ctor: 'ReceiveChatMessage', _0: a};
-};
-var _user$project$Main$ReceiveNewOrder = function (a) {
-	return {ctor: 'ReceiveNewOrder', _0: a};
-};
-var _user$project$Main$SendMessage = {ctor: 'SendMessage'};
+var _user$project$Main$SendPort = {ctor: 'SendPort'};
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -426,7 +430,7 @@ var _user$project$Main$view = function (model) {
 					_0: _elm_lang$html$Html_Attributes$class('btn btn-success'),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$SendMessage),
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$SendPort),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -446,6 +450,19 @@ var _user$project$Main$view = function (model) {
 			}
 		});
 };
+var _user$project$Main$HandleSendError = function (a) {
+	return {ctor: 'HandleSendError', _0: a};
+};
+var _user$project$Main$ReceiveChatMessage = function (a) {
+	return {ctor: 'ReceiveChatMessage', _0: a};
+};
+var _user$project$Main$ReceiveNewOrder = function (a) {
+	return {ctor: 'ReceiveNewOrder', _0: a};
+};
+var _user$project$Main$ReceiveCancelOrder = function (a) {
+	return {ctor: 'ReceiveCancelOrder', _0: a};
+};
+var _user$project$Main$SendMessage = {ctor: 'SendMessage'};
 var _user$project$Main$SetMessage = function (a) {
 	return {ctor: 'SetMessage', _0: a};
 };
@@ -464,11 +481,16 @@ var _user$project$Main$init = function (flags) {
 			_user$project$Main$ReceiveNewOrder,
 			A4(
 				_fbonetti$elm_phoenix_socket$Phoenix_Socket$on,
-				'waiter',
+				'cancel_order',
 				'kitchen:1',
-				_user$project$Main$ReceiveChatMessage,
-				_fbonetti$elm_phoenix_socket$Phoenix_Socket$withDebug(
-					_fbonetti$elm_phoenix_socket$Phoenix_Socket$init('ws://localhost:4000/socket/websocket')))));
+				_user$project$Main$ReceiveCancelOrder,
+				A4(
+					_fbonetti$elm_phoenix_socket$Phoenix_Socket$on,
+					'waiter',
+					'kitchen:1',
+					_user$project$Main$ReceiveChatMessage,
+					_fbonetti$elm_phoenix_socket$Phoenix_Socket$withDebug(
+						_fbonetti$elm_phoenix_socket$Phoenix_Socket$init('ws://localhost:4000/socket/websocket'))))));
 	var initSocket = _p0._0;
 	var phxCmd = _p0._1;
 	var valueDue = A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Main$modelDecoder, flags.data);
@@ -479,7 +501,8 @@ var _user$project$Main$init = function (flags) {
 			_0: {
 				orders: _p1._0,
 				phxSocket: initSocket,
-				messages: {ctor: '[]'}
+				messages: {ctor: '[]'},
+				toastr_message: _elm_lang$core$Maybe$Nothing
 			},
 			_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$PhoenixMsg, phxCmd)
 		};
@@ -489,7 +512,8 @@ var _user$project$Main$init = function (flags) {
 			_0: {
 				orders: {ctor: '[]'},
 				phxSocket: _fbonetti$elm_phoenix_socket$Phoenix_Socket$init(''),
-				messages: {ctor: '[]'}
+				messages: {ctor: '[]'},
+				toastr_message: _elm_lang$core$Maybe$Nothing
 			},
 			_1: _elm_lang$core$Platform_Cmd$none
 		};
@@ -596,6 +620,9 @@ var _user$project$Main$update = F2(
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				}
+			case 'ReceiveCancelOrder':
+				var somePayload = A2(_elm_lang$core$Debug$log, 'data', _p2._0);
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'HandleSendError':
 				var message = 'Failed to Send Message';
 				return {
@@ -606,6 +633,42 @@ var _user$project$Main$update = F2(
 							messages: {ctor: '::', _0: message, _1: model.messages}
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'SendCancelMessage':
+				var payload = _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'message',
+							_1: _elm_lang$core$Json_Encode$string(
+								_elm_lang$core$Basics$toString(_p2._0))
+						},
+						_1: {ctor: '[]'}
+					});
+				var phxPush = A2(
+					_fbonetti$elm_phoenix_socket$Phoenix_Push$onError,
+					_user$project$Main$HandleSendError,
+					A2(
+						_fbonetti$elm_phoenix_socket$Phoenix_Push$withPayload,
+						payload,
+						A2(_fbonetti$elm_phoenix_socket$Phoenix_Push$init, 'cancel_message', 'kitchen:1')));
+				var _p10 = A2(_fbonetti$elm_phoenix_socket$Phoenix_Socket$push, phxPush, model.phxSocket);
+				var phxSocket = _p10._0;
+				var phxCmd = _p10._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{phxSocket: phxSocket}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$PhoenixMsg, phxCmd)
+				};
+			case 'SendPort':
+				var entre = A2(_elm_lang$core$Debug$log, 'entre', 'entre');
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$Main$orderToJs('holi')
 				};
 			default:
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};

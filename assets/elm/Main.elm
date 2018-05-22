@@ -1,4 +1,4 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 import Debug exposing (log)
 import Html exposing (..)
@@ -26,6 +26,7 @@ type alias Model =
     { phxSocket : Phoenix.Socket.Socket Msg
     , orders : List Order
     , messages : List String
+    , toastr_message : Maybe String
     }
 
 
@@ -85,6 +86,7 @@ init flags =
             Phoenix.Socket.init "ws://localhost:4000/socket/websocket"
                 |> Phoenix.Socket.withDebug
                 |> Phoenix.Socket.on "waiter" "kitchen:1" ReceiveChatMessage
+                |> Phoenix.Socket.on "cancel_order" "kitchen:1" ReceiveCancelOrder
                 |> Phoenix.Socket.on "new_order" "kitchen:1" ReceiveNewOrder
                 |> Phoenix.Socket.join channel
     in
@@ -94,12 +96,13 @@ init flags =
                     nuevos
               , phxSocket = initSocket
               , messages = []
+              , toastr_message = Nothing
               }
             , Cmd.map PhoenixMsg phxCmd
             )
 
         Err msg ->
-            ( { orders = [], phxSocket = Phoenix.Socket.init "", messages = [] }, Cmd.none )
+            ( { orders = [], phxSocket = Phoenix.Socket.init "", messages = [], toastr_message = Nothing }, Cmd.none )
 
 
 
@@ -110,9 +113,12 @@ type Msg
     = PhoenixMsg (Phoenix.Socket.Msg Msg)
     | SetMessage String
     | SendMessage
+    | ReceiveCancelOrder JsEncode.Value
     | ReceiveNewOrder JsEncode.Value
     | ReceiveChatMessage JsEncode.Value
     | HandleSendError JsEncode.Value
+    | SendPort
+    | SendCancelMessage Int
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -152,7 +158,6 @@ update msg model =
             , Cmd.map PhoenixMsg phxCmd
             )
 
-        --
         ReceiveChatMessage raw ->
             let
                 example =
@@ -190,12 +195,47 @@ update msg model =
                 Err error ->
                     ( { model | messages = "Failed to receive message" :: model.messages }, Cmd.none )
 
+        ReceiveCancelOrder raw ->
+            let
+                somePayload =
+                    log "data" raw
+            in
+            ( model, Cmd.none )
+
         HandleSendError err ->
             let
                 message =
                     "Failed to Send Message"
             in
             ( { model | messages = message :: model.messages }, Cmd.none )
+
+        SendCancelMessage id ->
+            let
+                payload =
+                    JsEncode.object
+                        [ ( "message", JsEncode.string (toString id) )
+                        ]
+
+                phxPush =
+                    Phoenix.Push.init "cancel_message" "kitchen:1"
+                        |> Phoenix.Push.withPayload payload
+                        |> Phoenix.Push.onError HandleSendError
+
+                ( phxSocket, phxCmd ) =
+                    Phoenix.Socket.push phxPush model.phxSocket
+            in
+            ( { model
+                | phxSocket = phxSocket
+              }
+            , Cmd.map PhoenixMsg phxCmd
+            )
+
+        SendPort ->
+            let
+                entre =
+                    log "entre" "entre"
+            in
+            ( model, orderToJs "holi" )
 
         _ ->
             ( model, Cmd.none )
@@ -215,7 +255,7 @@ view model =
     div []
         [ button
             [ class "btn btn-success"
-            , onClick SendMessage
+            , onClick SendPort
             ]
             [ text "Send Message" ]
         , allMessages model.messages
@@ -261,7 +301,7 @@ orderCard order =
                     , text " "
                     , a [ class "btn btn-success", href ("/orders/" ++ toString order.id ++ "/edit") ] [ text "Agregar" ]
                     , text " "
-                    , a [ class "btn btn-danger" ] [ text "Cancelar" ]
+                    , button [ onClick (SendCancelMessage order.id), class "btn btn-danger" ] [ text "Cancelar" ]
                     ]
                 ]
             ]
@@ -296,6 +336,13 @@ foodOrderCard food_order =
         , th [] [ text (toString food_order.quantity) ]
         , th [] [ text (toString food_order.price) ]
         ]
+
+
+
+--ports
+
+
+port orderToJs : String -> Cmd msg
 
 
 

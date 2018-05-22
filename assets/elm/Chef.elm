@@ -1,4 +1,4 @@
-module Chef exposing (..)
+port module Chef exposing (..)
 
 import Debug exposing (log)
 import Html exposing (..)
@@ -11,6 +11,7 @@ import Phoenix.Push
 import Phoenix.Socket
 
 
+-- <script>toastr.success("Nueva orden N ' + order.id.to_s + '");</script>
 --flags
 
 
@@ -111,6 +112,7 @@ type Msg
     | SendMessage
     | ReceiveChatMessage JsEncode.Value
     | HandleSendError JsEncode.Value
+    | SendPort
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -179,6 +181,9 @@ update msg model =
             in
             ( { model | messages = message :: model.messages }, Cmd.none )
 
+        SendPort ->
+            ( model, toJs "holi" )
+
         _ ->
             ( model, Cmd.none )
 
@@ -192,7 +197,7 @@ view model =
     div []
         [ button
             [ class "btn btn-success"
-            , onClick SendMessage
+            , onClick SendPort
             ]
             [ text "Send Message" ]
         , allMessages model.messages
@@ -269,6 +274,13 @@ foodOrderCard food_order =
         , th [] [ text (toString food_order.quantity) ]
         , th [] [ text (toString food_order.price) ]
         ]
+
+
+
+--ports
+
+
+port toJs : String -> Cmd msg
 
 
 
