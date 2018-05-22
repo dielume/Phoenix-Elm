@@ -56,11 +56,15 @@ defmodule Tuto.Kitchen do
     |> Repo.all
   end
 
-  def list_orders_to_json do
+  def list_orders_paginate(params) do
     Order
-    |> Repo.all
-    |> Repo.preload(:food_orders)
-    |> Enum.map(fn order -> %Order{order | food_orders: (order.food_orders |> Repo.preload(:food))} end)
+    |> order_by(desc: :updated_at)
+    |> preload(food_orders: :food)
+    |> Repo.paginate(params)
+  end
+
+  def list_orders_to_json(%Scrivener.Page{entries: orders}) do
+    orders
     |> Enum.map(fn order -> order_to_json(order) end)
     |> Poison.encode!
   end

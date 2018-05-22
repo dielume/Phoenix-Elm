@@ -5,6 +5,7 @@ defmodule TutoWeb.FoodController do
   alias Tuto.Kitchen.Food
 
   def index(conn, params) do
+    IO.inspect  params
     foods = Kitchen.list_foods_pagination(params)
     render(conn, "index.html", foods: foods)
   end

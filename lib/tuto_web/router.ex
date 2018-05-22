@@ -19,8 +19,9 @@ defmodule TutoWeb.Router do
     get "/", PageController, :index
     get "/foods", FoodController, :index, as: :pages
     resources "/foods", FoodController, except: [:index]
-    resources "/chefs", ChefController, only: [:index]
-    resources "/orders", OrderController
+    get "/orders", OrderController, :index, as: :pages
+    resources "/orders", OrderController, except: [:index]
+    get "/chefs", ChefController, :index, as: :pages
     resources "/food_orders", FoodOrderController
   end
 
