@@ -22,13 +22,17 @@ import socket from "./socket"
 Order.init()
 var elmDiv = document.getElementById("elm-main");
 if(elmDiv != null){
-  console.log(elmDiv.getAttribute("data"));
   Elm.Main.embed(elmDiv, {
           data: elmDiv.getAttribute("data")
       });
 }
 
-
+var elmChef = document.getElementById("elm-chef");
+if(elmChef != null){
+  Elm.Chef.embed(elmChef, {
+          data: elmChef.getAttribute("data")
+      });
+}
 
 
 
